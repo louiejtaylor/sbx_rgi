@@ -1,6 +1,6 @@
 #  sbx_rgi
 
-This is an extension to the [Sunbeam pipeline](https://github.com/sunbeam-labs/sunbeam) that runs [RGI](https://card.mcmaster.ca/analyze/rgi) (Resistance Gene Identifier) to identify antibiotic resistance genes. Check out [Jia et al 2017](http://www.ncbi.nlm.nih.gov/pubmed/27789705) to learn more.
+This is an extension to the [Sunbeam pipeline](https://github.com/sunbeam-labs/sunbeam) that runs [RGI](https://card.mcmaster.ca/analyze/rgi) (Resistance Gene Identifier) to identify antibiotic resistance genes. Check out [Jia et al 2017](http://www.ncbi.nlm.nih.gov/pubmed/27789705) to learn more about RGI and CARD.
 
 ## Installing sbx_rgi
 
