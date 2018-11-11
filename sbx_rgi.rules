@@ -12,7 +12,7 @@ rule run_rgi:
 		rgi main --input_sequence {input.faa} --output_file {output.out} --input_type protein --low_quality --clean
 		"""
 
-rule read_rgi:
+rule load_rgi:
 	output:
 		temp(str(ANNOTATION_FP/'card'/'db_in.txt'))
 	params:
@@ -21,7 +21,7 @@ rule read_rgi:
 		"""
 		rgi load -i {params.card_json} > {output}
 		"""
-rule rgi_all:
+rule all_rgi:
 	input:
 		expand(str(ANNOTATION_FP/'card'/'{sample}_rgi.json'),sample=Samples.keys())
 		#rules.run_rgi.output
