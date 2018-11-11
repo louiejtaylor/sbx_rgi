@@ -9,8 +9,8 @@ rule run_rgi:
 		faa = str(ANNOTATION_FP/'genes'/'prodigal'/'{sample}_genes_prot.fa'),
 		rg_db_read = str(ANNOTATION_FP/'card'/'db_in.txt')
 	output:
-		out = str(ANNOTATION_FP/'card'/{sample}_rgi'),
-		json = str(ANNOTATION_FP/'card'/{sample}_rgi.json')
+		out = str(ANNOTATION_FP/'card'/'{sample}_rgi'),
+		json = str(ANNOTATION_FP/'card'/'{sample}_rgi.json')
 	shell:
 		"""
 		rgi main --input_sequence {input.faa} --output_file {output.out} --input_type protein --low_quality --clean
