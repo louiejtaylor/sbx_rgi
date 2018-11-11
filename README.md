@@ -1,6 +1,6 @@
 #  sbx_rgi
 
-This is an extension to the [Sunbeam pipeline](https://github.com/sunbeam-labs/sunbeam) that runs [RGI](https://card.mcmaster.ca/analyze/rgi) (Resistance Gene Identifier) to identify antibiotic resistance genes. Check out [Jia et al 2017](http://www.ncbi.nlm.nih.gov/pubmed/27789705) for more.
+This is an extension to the [Sunbeam pipeline](https://github.com/sunbeam-labs/sunbeam) that runs [RGI](https://card.mcmaster.ca/analyze/rgi) (Resistance Gene Identifier) to identify antibiotic resistance genes. Check out [Jia et al 2017](http://www.ncbi.nlm.nih.gov/pubmed/27789705) to learn more.
 
 ## Installing sbx_rgi
 
@@ -16,7 +16,7 @@ Add the new options to your existing configuration file:
 
     cat sunbeam/extensions/sbx_rgi/config.yml >> sunbeam_config.yml
 
-## Running an extension
+## Running
 
 To run sbx_rgi, simply run Sunbeam as usual with your extension's target rule specified:
 
