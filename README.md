@@ -26,7 +26,7 @@ here: https://card.mcmaster.ca/download. (Note that as of 2018/11/11 the links o
 Once you've downloaded and extracted them, just add the path to the "card.json" file into the corresponding location in your config file:
 
     sbx_rgi:
-      card_db_path: "[your_path]"
+      card_db_path: "[your_path]/card.json"
 
 ## Running
 
