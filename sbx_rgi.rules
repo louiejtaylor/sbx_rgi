@@ -1,11 +1,7 @@
 # -*- mode: Snakemake -*-
 
-rule rgi_all:
-	input:
-		rules.run_rgi.output
-
 rule run_rgi:
-	input:
+	input: 
 		faa = str(ANNOTATION_FP/'genes'/'prodigal'/'{sample}_genes_prot.fa'),
 		rg_db_read = str(ANNOTATION_FP/'card'/'db_in.txt')
 	output:
@@ -20,8 +16,13 @@ rule read_rgi:
 	output:
 		temp(str(ANNOTATION_FP/'card'/'db_in.txt'))
 	params:
-		card_json = str(Cfg['sbx_rgi']['card_db_path']/'{genome}.fasta')
+		card_json = str(Cfg['sbx_rgi']['card_db_path'])
 	shell:
 		"""
 		rgi load -i {params.card_json} > {output}
 		"""
+rule rgi_all:
+	input:
+		expand(str(ANNOTATION_FP/'card'/'{sample}_rgi.json'),sample=Samples.keys())
+		#rules.run_rgi.output
+
