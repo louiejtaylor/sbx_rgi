@@ -12,7 +12,7 @@ Clone the extension directory into the sunbeam/extensions/ folder:
 
 Install the requirements through Conda:
 
-    conda install -c bioconda --file sunbeam/extensions/sbx_rgi/requirements.txt
+    conda install -c bioconda -c conda-forge --file sunbeam/extensions/sbx_rgi/requirements.txt
 
 Add the new options to your existing configuration file: 
 
