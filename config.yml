@@ -1,2 +1,2 @@
 sbx_rgi:
-  threads: 4
+  card_db_path: "" #path to card.json

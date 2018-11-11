@@ -8,6 +8,8 @@ Clone the extension directory into the sunbeam/extensions/ folder:
 
     git clone https://github.com/louiejtaylor/sbx_rgi/ sunbeam/extensions/sbx_template
 
+(Make sure you're in the correct Conda env, if not, run `source activate sunbeam`)
+
 Install the requirements through Conda:
 
     conda install -c bioconda --file sunbeam/extensions/sbx_rgi/requirements.txt
@@ -15,6 +17,16 @@ Install the requirements through Conda:
 Add the new options to your existing configuration file: 
 
     cat sunbeam/extensions/sbx_rgi/config.yml >> sunbeam_config.yml
+
+## Databases
+
+You'll need databases for RGI to run on. These are not installed automatically with RGI, you can grab them
+here: https://card.mcmaster.ca/download. (Note that as of 2018/11/11 the links on the webpage lead to .tar.gz files, but the actual format seems to be .tar.bz2)
+
+Once you've downloaded and extracted them, just add the path to the "card.json" file into the corresponding location in your config file:
+
+    sbx_rgi:
+      card_db_path: "[your_path]"
 
 ## Running
 

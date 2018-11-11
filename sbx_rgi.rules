@@ -1,6 +1,6 @@
 rule example_rule:
 	input:
-		#files required for input	
+		faa = str(ANNOTATION_FP/'genes'/'prodigal'/'{sample}_genes_prot.fa')
 	output:
 		#files created after successful rule completion
 	shell:
