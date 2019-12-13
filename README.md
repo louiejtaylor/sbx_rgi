@@ -27,7 +27,7 @@ The `--use-conda` flag is required to let Snakemake know that you want to use th
 
 ## Contents
 
- - `requirements.txt` specifies the extension's dependencies
+ - `sbx_rgi_env.yml` specifies the extension's dependencies
  - `config.yml` contains configuration options that can be specified by the user when running sbx_rgi
  - `sbx_rgi.rules` contains the rules (logic/commands run) of the extension
 
