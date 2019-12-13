@@ -1,29 +1,41 @@
 # -*- mode: Snakemake -*-
 
+rule download_card_db:
+    output:
+        str(ANNOTATION_FP/'card'/'db'/'card.json')
+    params:
+        bz2_name = str(ANNOTATION_FP/'card'/'db.tar.bz2')
+    shell:
+        """
+        wget https://card.mcmaster.ca/latest/data -O {params.bz2_name}
+        tar -xvjf {params.bz2_name}
+        rm {params.bz2_name}
+        """
+
 rule run_rgi:
-	input: 
-		faa = str(ANNOTATION_FP/'genes'/'prodigal'/'{sample}_genes_prot.fa'),
-		rg_db_read = str(ANNOTATION_FP/'card'/'db_in.txt')
-	output:
-		str(ANNOTATION_FP/'card'/'{sample}_rgi.txt')
-	params:
-		out = str(ANNOTATION_FP/'card'/'{sample}_rgi')
-	shell:
-		"""
-		rgi main --input_sequence {input.faa} --output_file {params.out} --input_type protein --low_quality --clean
-		"""
+    input: 
+        faa = str(ANNOTATION_FP/'genes'/'prodigal'/'{sample}_genes_prot.fa'),
+        rg_db_read = str(ANNOTATION_FP/'card'/'db_in.txt')
+    output:
+        str(ANNOTATION_FP/'card'/'{sample}_rgi.txt')
+    params:
+        out = str(ANNOTATION_FP/'card'/'{sample}_rgi.json')
+    shell:
+        """
+        rgi main --input_sequence {input.faa} --output_file {params.out} --input_type protein --low_quality --clean
+        """
 
 rule load_rgi:
-	output:
-		temp(str(ANNOTATION_FP/'card'/'db_in.txt'))
-	params:
-		card_json = str(Cfg['sbx_rgi']['card_db_path'])
-	shell:
-		"""
-		rgi load -i {params.card_json} > {output}
-		"""
+    input:
+        str(ANNOTATION_FP/'card'/'db'/'card.json')
+    output:
+        temp(str(ANNOTATION_FP/'card'/'db_in.txt'))
+    shell:
+        """
+        rgi load -i {input} > {output}
+        """
+
 rule all_rgi:
-	input:
-		expand(str(ANNOTATION_FP/'card'/'{sample}_rgi.json'),sample=Samples.keys())
-		#rules.run_rgi.output
+    input:
+        expand(str(ANNOTATION_FP/'card'/'{sample}_rgi.json'),sample=Samples.keys())
 
