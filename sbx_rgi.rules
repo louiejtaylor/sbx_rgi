@@ -4,11 +4,12 @@ rule download_card_db:
     output:
         str(ANNOTATION_FP/'card'/'db'/'card.json')
     params:
+        db_dir = str(ANNOTATION_FP/'card'/'db'),
         bz2_name = str(ANNOTATION_FP/'card'/'db.tar.bz2')
     shell:
         """
         wget https://card.mcmaster.ca/latest/data -O {params.bz2_name}
-        tar -xvjf {params.bz2_name}
+        tar -xvjf {params.bz2_name} --directory {params.db_dir}
         rm {params.bz2_name}
         """
 
@@ -19,7 +20,9 @@ rule run_rgi:
     output:
         str(ANNOTATION_FP/'card'/'{sample}_rgi.txt')
     params:
-        out = str(ANNOTATION_FP/'card'/'{sample}_rgi.json')
+        out = str(ANNOTATION_FP/'card'/'{sample}_rgi')
+    conda:
+        "sbx_rgi_env.yml"
     shell:
         """
         rgi main --input_sequence {input.faa} --output_file {params.out} --input_type protein --low_quality --clean
@@ -30,6 +33,8 @@ rule load_rgi:
         str(ANNOTATION_FP/'card'/'db'/'card.json')
     output:
         temp(str(ANNOTATION_FP/'card'/'db_in.txt'))
+    conda:
+        "sbx_rgi_env.yml"
     shell:
         """
         rgi load -i {input} > {output}
@@ -37,5 +42,5 @@ rule load_rgi:
 
 rule all_rgi:
     input:
-        expand(str(ANNOTATION_FP/'card'/'{sample}_rgi.json'),sample=Samples.keys())
+        expand(str(ANNOTATION_FP/'card'/'{sample}_rgi.txt'),sample=Samples.keys())
 

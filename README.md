@@ -4,39 +4,44 @@ This is an extension to the [Sunbeam pipeline](https://github.com/sunbeam-labs/s
 
 ## Installing sbx_rgi
 
-Clone the extension directory into the sunbeam/extensions/ folder:
+To install:
 
-    git clone https://github.com/louiejtaylor/sbx_rgi/ sunbeam/extensions/sbx_template
+    sunbeam extend https://github.com/sunbeam-labs/sbx_coassembly/
 
-(Make sure you're in the correct Conda env, if not, run `source activate sunbeam`)
 
-Install the requirements through Conda:
+Config options for `sbx_rgi` are automatically added on `sunbeam init`. If you're installing an extension in a project where you already have a config file, run the following to add the options for your newly added extension to your config (the `-i` flag means in-place config file modification; remove the `-i` flag to see the new config in stdout):
 
-    conda install -c bioconda -c conda-forge --file sunbeam/extensions/sbx_rgi/requirements.txt
+    sunbeam config update -i sunbeam_config.yml
 
-Add the new options to your existing configuration file: 
+As of December 2019, the latest CARD database version is automatically grabbed by the extension, so no need to worry about dbs!
 
-    cat sunbeam/extensions/sbx_rgi/config.yml >> sunbeam_config.yml
-
-## Databases
-
-You'll need databases for RGI to run on. These are not installed automatically with RGI, you can grab them
-here: https://card.mcmaster.ca/download. (Note that as of 2018/11/11 the links on the webpage lead to .tar.gz files, but the actual format seems to be .tar.bz2)
-
-Once you've downloaded and extracted them, just add the path to the "card.json" file into the corresponding location in your config file:
-
-    sbx_rgi:
-      card_db_path: "[your_path]/card.json"
+See legacy install instructions below.
 
 ## Running
 
-To run sbx_rgi, simply run Sunbeam as usual with your extension's target rule specified:
+To run sbx_rgi, simply run Sunbeam as usual with the `all_rgi` target rule specified:
 
-    sunbeam run --configfile=sunbeam_config.yml all_rgi
+    sunbeam run --configfile=sunbeam_config.yml --use-conda all_rgi
+
+The `--use-conda` flag is required to let Snakemake know that you want to use the conda environment(s) included with your extension.
 
 ## Contents
 
  - `requirements.txt` specifies the extension's dependencies
  - `config.yml` contains configuration options that can be specified by the user when running sbx_rgi
  - `sbx_rgi.rules` contains the rules (logic/commands run) of the extension
+
+-----------
+
+## Legacy install instructions for sunbeam <3.0
+
+Clone the extension directory into the sunbeam/extensions/ folder:
+
+    git clone https://github.com/louiejtaylor/sbx_rgi/ sunbeam/extensions/sbx_template
+
+(Make sure you're in the correct Conda env, if not, run `source activate sunbeam`)
+
+Add the new options to your existing configuration file: 
+
+    cat sunbeam/extensions/sbx_rgi/config.yml >> sunbeam_config.yml
 
